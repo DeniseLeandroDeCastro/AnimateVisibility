@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -52,7 +55,6 @@ fun CustomButton(
     onClick: (Boolean) -> Unit,
     bgColor: Color = Color.Blue
 ) {
-
     Button(
         onClick = { onClick(!targetState) },
         colors = ButtonDefaults.buttonColors(
@@ -93,8 +95,11 @@ fun MainScreen() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-
-        if (boxVisible) {
+        AnimatedVisibility(
+            visible = boxVisible,
+            enter = fadeIn(),
+            exit = slideOutVertically()
+        ) {
             Box(
                 modifier = Modifier
                     .size(height = 200.dp, width = 200.dp)

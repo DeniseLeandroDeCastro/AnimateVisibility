@@ -80,4 +80,8 @@ AnimatedVisibility(visible = boxVisible) {
 
 </div>
 
+<p>
+Quando o aplicativo for testado, a ocultação e a exibição da caixa serão sutilmente animadas. O comportamento padrão do <b>AnimatedVisibility</b> é tão sutil que pode ser difícil notar qualquer diferença. Felizmente, a API Compose Animation oferece uma variedade de opções de personalização. A primeira opção permite que diferentes efeitos de animação sejam definidos quando os elementos secundários composables aparecem e desaparecem (chamados de animações de entrada e saída).
+</p>
+
 

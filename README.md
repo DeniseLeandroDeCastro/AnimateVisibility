@@ -141,4 +141,14 @@ fun MainScreen() {
 
 ```
 
+<p>
+  O conjunto completo de efeitos de animação é o seguinte:
+</p>
+<ul>
+  <li><b>expandHorizontally() -></b> O conteúdo é revelado usando uma técnica de recorte horizontal. Estão disponíveis opções para controlar quanto do conteúdo é revelado inicialmente antes do início da animação.</li>
+  <li><b>expandVertically() -></b> O conteúdo é revelado usando uma técnica de recorte vertical. Estão disponíveis opções para controlar quanto do conteúdo é inicialmente revelado antes do início da animação.</li>
+  <li><b>expandIn() -></b> O conteúdo é revelado usando técnicas de recorte horizontal e vertical. Estão disponíveis opções para controlar quanto do conteúdo é revelado inicialmente antes do início da animação.</li>
+  <li><b>fadeIn() -></b> Desaparece o conteúdo de transparente para opaco. A transparência inicial (alfa) pode ser declarada usando um valor de ponto flutuante entre 0 e 1. o padrão é 0.</li>
+</ul>
+
 

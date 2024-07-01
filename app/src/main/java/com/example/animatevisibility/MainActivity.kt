@@ -5,7 +5,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.animation.shrinkOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOut
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -65,6 +81,7 @@ fun CustomButton(
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen() {
     var boxVisible by remember { mutableStateOf(true) }
@@ -73,9 +90,10 @@ fun MainScreen() {
     }
     Column(
         Modifier
-            .padding(20.dp),
+            .padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(20.dp))
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -85,7 +103,6 @@ fun MainScreen() {
                 targetState = false,
                 onClick = onClick,
                 bgColor = colorResource(id = R.color.steel_blue)
-
             )
             CustomButton(
                 text = "Hide",
@@ -97,20 +114,20 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(20.dp))
         AnimatedVisibility(
             visible = boxVisible,
-            enter = fadeIn(),
-            exit = slideOutVertically()
+            enter = fadeIn(animationSpec = tween(durationMillis = 5500)),
+            exit = fadeOut(animationSpec = tween(durationMillis = 5500))
         ) {
-            Box(
-                modifier = Modifier
-                    .size(height = 200.dp, width = 200.dp)
-                    .background(colorResource(id = R.color.steel_blue))
-            ) {
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = "Box Visible",
-                    style = MaterialTheme.typography.displayLarge,
-                    textAlign = TextAlign.Center,
-                    color = Color.White
+            Row {
+                Spacer(modifier = Modifier.height(20.dp))
+                Box(
+                    modifier = Modifier
+                        .animateEnterExit(
+                            enter = slideInVertically(animationSpec = tween(durationMillis = 5500)),
+                            exit = slideOutVertically(
+                                animationSpec = tween(durationMillis = 5500))
+                        )
+                        .size(height = 200.dp, width = 200.dp)
+                        .background(colorResource(id = R.color.steel_blue))
                 )
             }
         }

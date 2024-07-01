@@ -82,6 +82,63 @@ AnimatedVisibility(visible = boxVisible) {
 
 <p>
 Quando o aplicativo for testado, a ocultação e a exibição da caixa serão sutilmente animadas. O comportamento padrão do <b>AnimatedVisibility</b> é tão sutil que pode ser difícil notar qualquer diferença. Felizmente, a API Compose Animation oferece uma variedade de opções de personalização. A primeira opção permite que diferentes efeitos de animação sejam definidos quando os elementos secundários composables aparecem e desaparecem (chamados de animações de entrada e saída).
+As animações a serem usadas quando os filhos de um elemento <i>Composable</i> AnimatedVisibility aparecem e desaparecem são declaradas usando os parâmetros enter e exit. As alterações a seguir, por exemplo, configuram as animações para que a caixa apareça gradualmente e deslize-a verticalmente para fora da visualização.
 </p>
+
+```kotlin
+
+@Composable
+fun MainScreen() {
+    var boxVisible by remember { mutableStateOf(true) }
+    val onClick = { newState: Boolean ->
+        boxVisible = newState
+    }
+    Column(
+        Modifier
+            .padding(20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            CustomButton(
+                text = "Show",
+                targetState = false,
+                onClick = onClick,
+                bgColor = colorResource(id = R.color.steel_blue)
+
+            )
+            CustomButton(
+                text = "Hide",
+                targetState = true,
+                onClick = onClick,
+                bgColor = colorResource(id = R.color.light_steel_blue)
+            )
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        AnimatedVisibility(
+            visible = boxVisible,
+            enter = fadeIn(),
+            exit = slideOutVertically()
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(height = 200.dp, width = 200.dp)
+                    .background(colorResource(id = R.color.steel_blue))
+            ) {
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "Box Visible",
+                    style = MaterialTheme.typography.displayLarge,
+                    textAlign = TextAlign.Center,
+                    color = Color.White
+                )
+            }
+        }
+    }
+}
+
+```
 
 

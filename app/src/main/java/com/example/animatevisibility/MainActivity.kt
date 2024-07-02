@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.tween
@@ -112,24 +114,21 @@ fun MainScreen() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        AnimatedVisibility(
-            visible = boxVisible,
-            enter = fadeIn(animationSpec = tween(durationMillis = 5500)),
-            exit = fadeOut(animationSpec = tween(durationMillis = 5500))
-        ) {
-            Row {
-                Spacer(modifier = Modifier.height(20.dp))
-                Box(
-                    modifier = Modifier
-                        .animateEnterExit(
-                            enter = slideInVertically(animationSpec = tween(durationMillis = 5500)),
-                            exit = slideOutVertically(
-                                animationSpec = tween(durationMillis = 5500))
-                        )
-                        .size(height = 200.dp, width = 200.dp)
-                        .background(colorResource(id = R.color.steel_blue))
-                )
-            }
+        Crossfade(
+            targetState = boxVisible,
+            animationSpec = tween(5000)) { visible ->
+                when(visible) {
+                    true -> CustomButton(
+                        text = "Show",
+                        targetState = false,
+                        onClick = onClick,
+                        bgColor = colorResource(id = R.color.steel_blue))
+                    false -> CustomButton(
+                        text = "Hide",
+                        targetState = true,
+                        onClick = onClick,
+                        bgColor = colorResource(id = R.color.light_steel_blue))
+                }
         }
     }
 }

@@ -1,5 +1,8 @@
 <div align="center">
 
+![Static Badge](https://img.shields.io/badge/status-conclu%C3%ADdo-%23FF6347)
+
+
 # Animate visibility
 
 <img src="https://cdn-icons-png.flaticon.com/512/12431/12431059.png" width="100" height="100"/>

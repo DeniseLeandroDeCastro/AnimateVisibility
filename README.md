@@ -1,9 +1,5 @@
 <div align="center">
 
-### Em construção
-
-<img src="https://github.com/DeniseLeandroDeCastro/AnimateVisibility/assets/29150094/ca1e8bfa-a088-42f6-bc03-af1b8e82c97a" width="50" height="50"/>
-
 # Animate visibility
 
 <img src="https://cdn-icons-png.flaticon.com/512/12431/12431059.png" width="100" height="100"/>
